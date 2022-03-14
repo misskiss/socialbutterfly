@@ -8,7 +8,8 @@ module.exports = context => {
   const authHeader = context.req.headers.authorization;
   if (authHeader) {
     // Bearer ...
-    const token = authHeader.split('Bearer ')[1];
+    // replace method needed because token returns single string at end
+    const token = authHeader.split('Bearer ')[1].replace("'", '');
     if (token) {
       try {
         const user = jwt.verify(token, SECRET_KEY);
